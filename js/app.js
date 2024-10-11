@@ -1,21 +1,39 @@
-let currentPuzzleIndex = 0;
-let inventory = [];
-let totalKeys = 5;
-let keysDropped = 0;
-let puzzles = [
-  { cipher: 'UFTU', answer: 'TEST', hint: 'Shift the letters by one.' },
-  { cipher: 'JGNNQ', answer: 'HELLO', hint: 'Shift the letters back by 2.' },
-  { cipher: 'NZP LZA', answer: 'KEY TWO', hint: 'Substitute letters.' },
-  { cipher: 'MPHMXTX', answer: 'SECURE', hint: 'Shift each letter forward by 4.' },
-  { cipher: 'LXFOPV EF RNHR', answer: 'ATTACK AT DAWN', hint: 'Try using a Caesar Cipher with a shift of 3.' }
-];
+// Welcome screen to menu screen transition
+document.getElementById('start-game').addEventListener('click', function() {
+  switchScreen('welcome-screen', 'menu-screen');
+});
 
-// Event listeners for solving puzzles, showing hints, and learning ciphers
-document.getElementById('check-cipher').addEventListener('click', checkCipher);
-document.getElementById('show-hint').addEventListener('click', showHint);
-document.getElementById('learn-ciphers').addEventListener('click', openCipherModal);
-document.getElementById('close-modal').addEventListener('click', closeCipherModal);
+// Menu screen to game screen (Cryptography Puzzle)
+document.getElementById('start-crypto').addEventListener('click', function() {
+  switchScreen('menu-screen', 'game-screen'); // Move to Cryptography Puzzle (main game)
+});
 
+// Go back to the menu screen from the game screen
+document.getElementById('back-to-menu').addEventListener('click', function() {
+  switchScreen('game-screen', 'menu-screen');
+});
+
+// Utility function to switch screens
+function switchScreen(hideScreenId, showScreenId) {
+  document.getElementById(hideScreenId).classList.add('hidden');
+  document.getElementById(showScreenId).classList.remove('hidden');
+  document.getElementById(showScreenId).classList.add('active-screen');
+}
+
+// Other game logic (unchanged)
+
+function unlockDoor() {
+  document.getElementById('locked-door').style.display = 'none';
+  document.getElementById('unlocked-door').style.display = 'block';
+
+  document.getElementById('inventory-section').style.display = 'none';  
+  document.querySelector('.puzzle-section').style.display = 'none'; 
+  document.querySelector('.instruction').style.display = 'none'; 
+
+  document.getElementById('final-score-section').style.display = 'block';
+}
+
+// Drag and drop inventory management (for keys)
 function allowDrop(event) {
   event.preventDefault();
 }
@@ -39,6 +57,7 @@ function drop(event) {
   }
 }
 
+// Check cipher input
 function checkCipher() {
   const userInput = document.getElementById('cipher-input').value.toUpperCase();
   const puzzle = puzzles[currentPuzzleIndex];
@@ -58,21 +77,12 @@ function checkCipher() {
   }
 }
 
-function loadNextPuzzle() {
-  if (currentPuzzleIndex < totalKeys) {
-    document.getElementById('cipher-result').textContent = '';
-    document.getElementById('cipher-input').value = '';
-    document.getElementById('puzzle-number').textContent = currentPuzzleIndex + 1;
-    document.getElementById('cipher-challenge').textContent = `Cipher: ${puzzles[currentPuzzleIndex].cipher}`;
-    document.getElementById('hint-text').classList.add('hidden');  // Hide hint when new puzzle loads
-  }
-}
-
+// Add key to inventory
 function addToInventory(itemName) {
   inventory.push(itemName);
   const inventoryDiv = document.getElementById('inventory');
   const itemImg = document.createElement('img');
-  itemImg.src = `images/${itemName}.png`;
+  itemImg.src = `images/${itemName}.png`;  // Assuming keys are named "key1.png", "key2.png", etc.
   itemImg.id = itemName;
   itemImg.className = 'inventory-item';
   itemImg.draggable = true;
@@ -80,52 +90,32 @@ function addToInventory(itemName) {
   inventoryDiv.appendChild(itemImg);
 }
 
-function showInventoryAndDoor() {
-  document.querySelector('.puzzle-section').classList.add('hidden');
-  document.querySelector('.room-layout').classList.remove('hidden');
-  document.getElementById('inventory-section').classList.remove('hidden');
+// Load the next puzzle
+function loadNextPuzzle() {
+  if (currentPuzzleIndex < totalKeys) {
+    document.getElementById('cipher-result').textContent = '';
+    document.getElementById('cipher-input').value = '';
+    document.getElementById('puzzle-number').textContent = currentPuzzleIndex + 1;
+    document.getElementById('cipher-challenge').textContent = `Cipher: ${puzzles[currentPuzzleIndex].cipher}`;
+    document.getElementById('hint-text').classList.add('hidden');
+  }
 }
 
-function unlockDoor() {
-  document.getElementById('locked-door').style.display = 'none';
-  document.getElementById('unlocked-door').style.display = 'block';
-  document.getElementById('inventory-section').classList.add('hidden');
-  document.getElementById('final-score-section').style.display = 'block';
-  clearInventory();
-}
-
-function clearInventory() {
-  inventory = [];
-  keysDropped = 0;
-  document.getElementById('inventory').innerHTML = '';
-}
-
-document.getElementById('restart-game').addEventListener('click', restartGame);
-
-function restartGame() {
-  currentPuzzleIndex = 0;
-  clearInventory();
-  document.getElementById('locked-door').style.display = 'block';
-  document.getElementById('unlocked-door').style.display = 'none';
-  document.getElementById('room-1').style.display = 'block';
-  document.getElementById('final-score-section').style.display = 'none';
-  loadNextPuzzle();
-}
-
-// Show Hint for Current Puzzle
+// Show hint for current puzzle
 function showHint() {
   const hint = puzzles[currentPuzzleIndex].hint;
   document.getElementById('hint-text').textContent = `Hint: ${hint}`;
   document.getElementById('hint-text').classList.remove('hidden');
 }
 
-// Open the Modal to Explain Ciphers
+// Modal for cipher explanation
+document.getElementById('learn-ciphers').addEventListener('click', openCipherModal);
+document.getElementById('close-modal').addEventListener('click', closeCipherModal);
+
 function openCipherModal() {
-  document.getElementById('cipher-modal').classList.remove('hidden');
   document.getElementById('cipher-modal').style.display = 'block';
 }
 
-// Close the Modal
 function closeCipherModal() {
   document.getElementById('cipher-modal').style.display = 'none';
 }

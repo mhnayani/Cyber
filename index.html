@@ -8,22 +8,40 @@
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div class="escape-room-container">
+  <!-- Welcome Screen -->
+  <div id="welcome-screen" class="screen active-screen">
+    <h1>Welcome to Cyber Escape Room</h1>
+    <button id="start-game" class="btn">Start</button>
+  </div>
+
+  <!-- Menu Screen -->
+  <div id="menu-screen" class="screen hidden">
+    <h2>Select a Game</h2>
+    <button id="start-crypto" class="btn">Cryptography Puzzle</button>
+    <button id="start-memory" class="btn">Memory Game</button> <!-- Example of another game -->
+  </div>
+
+  <!-- Game Screen (Escape Room Game) -->
+  <div id="game-screen" class="escape-room-container hidden">
     <header>
       <h1>Escape Room Adventure</h1>
+      <!-- Back to Menu Button -->
+      <button id="back-to-menu" class="btn back-btn">Back to Menu</button>
     </header>
+
+    <!-- Inventory in the Top Right -->
+    <section id="inventory-section" class="inventory-top-right">
+      <h3>Your Inventory</h3>
+      <div id="inventory">
+        <!-- Collected keys will be displayed here -->
+      </div>
+    </section>
 
     <!-- Room Layout -->
     <section id="room-1" class="room active-room">
       <h2 id="instruction-text">Find 5 Keys to Unlock the Door</h2>
       <p class="instruction">Solve puzzles to collect all 5 keys. Drag the keys onto the door to unlock it.</p>
 
-      <!-- Buttons for Hints and Learning -->
-      <div class="puzzle-options">
-        <button id="show-hint" class="btn hint-btn">Hint</button>
-        <button id="learn-ciphers" class="btn learn-btn">How Ciphers Work</button>
-      </div>
-      
       <div class="room-layout">
         <!-- Locked Door -->
         <img src="images/locked-door.png" id="locked-door" class="room-object door" ondrop="drop(event)" ondragover="allowDrop(event)" alt="Locked Door" title="Drag the keys onto the door to unlock!">
@@ -39,15 +57,17 @@
         <input type="text" id="cipher-input" placeholder="Enter cipher solution">
         <button id="check-cipher" class="btn">Submit</button>
         <p id="cipher-result"></p>
-        <p id="hint-text" class="hint-text hidden"></p>
-      </div>
-    </section>
 
-    <!-- Inventory -->
-    <section id="inventory-section">
-      <h3>Your Inventory</h3>
-      <div id="inventory">
-        <!-- Collected keys will be displayed here -->
+        <!-- Hint Button and Hint Text at the Bottom -->
+        <div class="hint-container">
+          <button id="show-hint" class="btn hint-btn">Hint</button>
+          <p id="hint-text" class="hint-text hidden"></p>
+        </div>
+
+        <!-- "How Ciphers Work" Button Under Hint -->
+        <div class="learn-section">
+          <button id="learn-ciphers" class="btn learn-btn">How Ciphers Work</button>
+        </div>
       </div>
     </section>
 
@@ -72,7 +92,6 @@
         <p>To decode a cipher, look for patterns and try to match them to possible shifts or substitutions.</p>
       </div>
     </div>
-
   </div>
 
   <script src="js/app.js"></script>

@@ -78,34 +78,38 @@ header h1 {
 }
 
 /* Inventory Section */
-#inventory-section {
+.inventory-top-right {
+    position: absolute;
+    top: 10px;
+    right: 20px;
     background-color: rgba(34, 34, 34, 0.9);
     padding: 15px;
     border-radius: 5px;
-    width: 100%;
-    max-width: 700px;
-    text-align: center;
-    margin-top: 10px;
+    width: 250px;
     box-sizing: border-box;
-}
-
-#inventory {
+    text-align: center;
+  }
+  
+  #inventory {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
-    flex-wrap: wrap;
-}
-
-.inventory-item {
+    flex-wrap: wrap; /* Allow keys to wrap in the inventory */
+    max-width: 200px; /* Adjust the width to prevent overflow */
+    overflow: hidden;
+  }
+  
+  .inventory-item {
     width: 40px;
     height: auto;
     margin-right: 10px;
+    margin-bottom: 10px; /* Add bottom margin for wrapping */
     cursor: grab;
-}
-
-.inventory-item.dragging {
+  }
+  
+  .inventory-item.dragging {
     opacity: 0.5;
-}
+  }
 
 /* Ensure the game area uses space dynamically */
 .puzzle-section {
@@ -152,6 +156,22 @@ button.btn:hover {
     background-color: #3cb3a5;
 }
 
+/* Back to Menu Button Styling */
+.back-btn {
+    background-color: #2aa198;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px;
+}
+
+.back-btn:hover {
+    background-color: #3cb3a5;
+}
+
 /* Animations */
 @keyframes fadeIn {
     from { opacity: 0; }
@@ -172,62 +192,6 @@ button.btn:hover {
     }
 }
 
-/* Key styling for drag-and-drop */
-.inventory-item {
-    width: 40px;
-    height: auto;
-    margin-right: 10px;
-    cursor: grab;
-}
-
-.inventory-item.dragging {
-    opacity: 0.5;
-}
-
-.door {
-    width: 120px;
-    height: auto;
-    border: 2px dashed #f25f85;
-    padding: 10px;
-    transition: background-color 0.3s ease;
-}
-
-.door.droppable {
-    background-color: rgba(242, 95, 133, 0.2);
-}
-
-/* Style for the unlocked door */
-#unlocked-door {
-    display: none;
-    width: 120px;
-    height: auto;
-}
-
-/* Hint and Learn buttons */
-.puzzle-options {
-    margin-top: 15px;
-  }
-  
-.hint-btn, .learn-btn {
-    background-color: #2aa198;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-right: 10px;
-  }
-  
-.hint-btn:hover, .learn-btn:hover {
-    background-color: #3cb3a5;
-  }
-  
-.hint-text {
-    font-style: italic;
-    color: #ff7598;
-    margin-top: 10px;
-  }
-  
 /* Modal for learning about ciphers */
 .modal {
     display: none; /* Hidden by default */
@@ -242,7 +206,7 @@ button.btn:hover {
     padding-top: 60px;
   }
   
-.modal-content {
+  .modal-content {
     background-color: #1c1c1e;
     margin: 5% auto;
     padding: 20px;
@@ -253,7 +217,7 @@ button.btn:hover {
     text-align: center;
   }
   
-.close-modal {
+  .close-modal {
     color: #aaa;
     float: right;
     font-size: 28px;
@@ -261,15 +225,8 @@ button.btn:hover {
     cursor: pointer;
   }
   
-.close-modal:hover, .close-modal:focus {
+  .close-modal:hover, .close-modal:focus {
     color: #fff;
     text-decoration: none;
     cursor: pointer;
   }
-  
-/* Hidden Class */
-.hidden {
-    display: none;
-  }
-  
-  
