@@ -29,40 +29,24 @@
       <button id="back-to-menu" class="btn back-btn">Back to Menu</button>
     </header>
 
-    <!-- Inventory in the Top Right -->
-    <section id="inventory-section" class="inventory-top-right hidden">
-      <h3>Your Inventory</h3>
-      <div id="inventory">
-        <!-- Collected keys will be displayed here -->
-      </div>
-    </section>
+    <!-- About Section -->
+    <main>
+        <section class="about-section">
+            <h2>About the Escape Room</h2>
+            <p>Welcome to the UTD Escape Room! This interactive challenge allows you to explore key cybersecurity concepts through exciting games and puzzles. Whether you're a beginner or an expert, there’s something here for everyone.</p>
+        </section>
 
-    <!-- Room Layout -->
-    <section id="room-1" class="room active-room">
-      <h2 id="instruction-text">Find 5 Keys to Unlock the Door</h2>
-      <p class="instruction">Solve puzzles to collect all 5 keys. Drag the keys onto the door to unlock it.</p>
+        <!-- Challenges Section -->
+        <section class="challenges-section">
+            <h2>Challenges Overview</h2>
 
-      <div class="room-layout hidden">
-        <!-- Locked Door -->
-        <img src="images/locked-door.png" id="locked-door" class="room-object door" ondrop="drop(event)" ondragover="allowDrop(event)" alt="Locked Door" title="Drag the keys onto the door to unlock!">
-
-        <!-- Unlocked Door (hidden initially) -->
-        <img src="images/unlocked-door.png" id="unlocked-door" class="room-object door" alt="Unlocked Door" style="display: none;">
-      </div>
-
-      <!-- Puzzle Section -->
-      <div class="puzzle-section">
-        <h3>Cryptography Puzzle <span id="puzzle-number">1</span>/5</h3>
-        <p id="cipher-challenge">Cipher: UFTU</p>
-        <input type="text" id="cipher-input" placeholder="Enter cipher solution">
-        <button id="check-cipher" class="btn">Submit</button>
-        <p id="cipher-result"></p>
-
-        <!-- Hint Button and Hint Text at the Bottom -->
-        <div class="hint-container">
-          <button id="show-hint" class="btn hint-btn">Hint</button>
-          <p id="hint-text" class="hint-text hidden"></p>
-        </div>
+            <!-- Challenge 1 Image -->
+            <div class="challenge">
+                <h3>Jeopardy Challenge: System Infrastructure and Architecture</h3>
+                <p>Answer questions related to system infrastructure and architecture to proceed!</p>
+                <!-- Replace with the actual challenge image from your images folder -->
+                <img src="images/challenge1.png" alt="Challenge 1 Image">
+            </div>
 
         <!-- "How Ciphers Work" Button Under Hint -->
         <div class="learn-section">
