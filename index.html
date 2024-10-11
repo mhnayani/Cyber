@@ -30,7 +30,7 @@
     </header>
 
     <!-- Inventory in the Top Right -->
-    <section id="inventory-section" class="inventory-top-right">
+    <section id="inventory-section" class="inventory-top-right hidden">
       <h3>Your Inventory</h3>
       <div id="inventory">
         <!-- Collected keys will be displayed here -->
@@ -42,7 +42,7 @@
       <h2 id="instruction-text">Find 5 Keys to Unlock the Door</h2>
       <p class="instruction">Solve puzzles to collect all 5 keys. Drag the keys onto the door to unlock it.</p>
 
-      <div class="room-layout">
+      <div class="room-layout hidden">
         <!-- Locked Door -->
         <img src="images/locked-door.png" id="locked-door" class="room-object door" ondrop="drop(event)" ondragover="allowDrop(event)" alt="Locked Door" title="Drag the keys onto the door to unlock!">
 
