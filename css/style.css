@@ -1,0 +1,275 @@
+/* Global Styling */
+body {
+    font-family: 'Orbitron', sans-serif;
+    background-color: #1c1c1e;
+    color: #f2f2f2;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+header {
+    text-align: center;
+    padding: 20px;
+    background: #111;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    color: #f25f85;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.escape-room-container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    background: url('../images/dark-room-bg.jpg') no-repeat center center/cover;
+}
+
+.room {
+    background-color: rgba(0, 0, 0, 0.85);
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.7);
+}
+
+.instruction {
+    font-size: 1.2rem;
+    color: #c5c5c5;
+    margin-bottom: 20px;
+}
+
+.room-layout {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.room-object {
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.room-object:hover {
+    transform: scale(1.1);
+}
+
+#locked-door {
+    width: 120px;
+}
+
+#unlocked-door {
+    width: 120px;
+    display: none;
+}
+
+/* Inventory Section */
+#inventory-section {
+    background-color: rgba(34, 34, 34, 0.9);
+    padding: 15px;
+    border-radius: 5px;
+    width: 100%;
+    max-width: 700px;
+    text-align: center;
+    margin-top: 10px;
+    box-sizing: border-box;
+}
+
+#inventory {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.inventory-item {
+    width: 40px;
+    height: auto;
+    margin-right: 10px;
+    cursor: grab;
+}
+
+.inventory-item.dragging {
+    opacity: 0.5;
+}
+
+/* Ensure the game area uses space dynamically */
+.puzzle-section {
+    margin-bottom: 20px;
+}
+
+.hidden {
+    display: none;
+}
+
+button.btn {
+    background-color: #f25f85;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button.btn:hover {
+    background-color: #ff7598;
+}
+
+#puzzle-number {
+    color: #f25f85;
+    font-weight: bold;
+}
+
+#final-score-section {
+    display: none;
+    text-align: center;
+    background-color: rgba(34, 34, 34, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+.restart {
+    background-color: #2aa198;
+}
+
+.restart:hover {
+    background-color: #3cb3a5;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.room-object, .puzzle-section {
+    animation: fadeIn 2s ease-in-out;
+}
+
+@media (max-width: 600px) {
+    .room {
+        width: 95%;
+    }
+
+    header h1 {
+        font-size: 2rem;
+    }
+}
+
+/* Key styling for drag-and-drop */
+.inventory-item {
+    width: 40px;
+    height: auto;
+    margin-right: 10px;
+    cursor: grab;
+}
+
+.inventory-item.dragging {
+    opacity: 0.5;
+}
+
+.door {
+    width: 120px;
+    height: auto;
+    border: 2px dashed #f25f85;
+    padding: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.door.droppable {
+    background-color: rgba(242, 95, 133, 0.2);
+}
+
+/* Style for the unlocked door */
+#unlocked-door {
+    display: none;
+    width: 120px;
+    height: auto;
+}
+
+/* Hint and Learn buttons */
+.puzzle-options {
+    margin-top: 15px;
+  }
+  
+.hint-btn, .learn-btn {
+    background-color: #2aa198;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+  
+.hint-btn:hover, .learn-btn:hover {
+    background-color: #3cb3a5;
+  }
+  
+.hint-text {
+    font-style: italic;
+    color: #ff7598;
+    margin-top: 10px;
+  }
+  
+/* Modal for learning about ciphers */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1000; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.8); /* Black background with transparency */
+    padding-top: 60px;
+  }
+  
+.modal-content {
+    background-color: #1c1c1e;
+    margin: 5% auto;
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 600px;
+    color: #fff;
+    text-align: center;
+  }
+  
+.close-modal {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+.close-modal:hover, .close-modal:focus {
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+/* Hidden Class */
+.hidden {
+    display: none;
+  }
+  
+  

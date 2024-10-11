@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cyber Escape Room</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="escape-room-container">
+    <header>
+      <h1>Escape Room Adventure</h1>
+    </header>
+
+    <!-- Room Layout -->
+    <section id="room-1" class="room active-room">
+      <h2 id="instruction-text">Find 5 Keys to Unlock the Door</h2>
+      <p class="instruction">Solve puzzles to collect all 5 keys. Drag the keys onto the door to unlock it.</p>
+
+      <!-- Buttons for Hints and Learning -->
+      <div class="puzzle-options">
+        <button id="show-hint" class="btn hint-btn">Hint</button>
+        <button id="learn-ciphers" class="btn learn-btn">How Ciphers Work</button>
+      </div>
+      
+      <div class="room-layout">
+        <!-- Locked Door -->
+        <img src="images/locked-door.png" id="locked-door" class="room-object door" ondrop="drop(event)" ondragover="allowDrop(event)" alt="Locked Door" title="Drag the keys onto the door to unlock!">
+
+        <!-- Unlocked Door (hidden initially) -->
+        <img src="images/unlocked-door.png" id="unlocked-door" class="room-object door" alt="Unlocked Door" style="display: none;">
+      </div>
+
+      <!-- Puzzle Section -->
+      <div class="puzzle-section">
+        <h3>Cryptography Puzzle <span id="puzzle-number">1</span>/5</h3>
+        <p id="cipher-challenge">Cipher: UFTU</p>
+        <input type="text" id="cipher-input" placeholder="Enter cipher solution">
+        <button id="check-cipher" class="btn">Submit</button>
+        <p id="cipher-result"></p>
+        <p id="hint-text" class="hint-text hidden"></p>
+      </div>
+    </section>
+
+    <!-- Inventory -->
+    <section id="inventory-section">
+      <h3>Your Inventory</h3>
+      <div id="inventory">
+        <!-- Collected keys will be displayed here -->
+      </div>
+    </section>
+
+    <!-- End Game Section -->
+    <section id="final-score-section" style="display: none;">
+      <h2>Congratulations!</h2>
+      <p>You found all 5 keys and unlocked the door!</p>
+      <button id="restart-game" class="btn restart">Restart Game</button>
+    </section>
+
+    <!-- Modal for Learning About Ciphers -->
+    <div id="cipher-modal" class="modal hidden">
+      <div class="modal-content">
+        <span class="close-modal" id="close-modal">&times;</span>
+        <h2>How Ciphers Work</h2>
+        <p>Ciphers are ways to encode messages so that they can't be easily understood by anyone except the intended recipient. Some common ciphers include:</p>
+        <ul>
+          <li><b>Caesar Cipher</b>: Letters are shifted by a certain number of positions in the alphabet. For example, "A" becomes "D" if shifted by 3.</li>
+          <li><b>Substitution Cipher</b>: Each letter in the plaintext is replaced by a corresponding letter from a scrambled alphabet.</li>
+          <li><b>Vigenère Cipher</b>: Uses a series of different Caesar ciphers based on the letters of a keyword.</li>
+        </ul>
+        <p>To decode a cipher, look for patterns and try to match them to possible shifts or substitutions.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
