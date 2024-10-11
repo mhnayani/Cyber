@@ -1,99 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cyber Escape Room</title>
-  <link rel="stylesheet" href="css/style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="UTD Escape Room: An interactive challenge to learn cybersecurity concepts through fun puzzles and games.">
+    <title>UTD Escape Room: Learn Cybersecurity</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to external CSS -->
 </head>
 <body>
-  <!-- Welcome Screen -->
-  <div id="welcome-screen" class="screen active-screen">
-    <h1>Welcome to Cyber Escape Room</h1>
-    <button id="start-game" class="btn">Start</button>
-  </div>
-
-  <!-- Menu Screen -->
-  <div id="menu-screen" class="screen hidden">
-    <h2>Select a Game</h2>
-    <button id="start-crypto" class="btn">Cryptography Puzzle</button>
-    <button id="start-memory" class="btn">Memory Game</button> <!-- Example of another game -->
-  </div>
-
-  <!-- Game Screen (Escape Room Game) -->
-  <div id="game-screen" class="escape-room-container hidden">
-    <header>
-      <h1>Escape Room Adventure</h1>
-      <!-- Back to Menu Button -->
-      <button id="back-to-menu" class="btn back-btn">Back to Menu</button>
+    <!-- Main Header Section -->
+    <header class="main-header">
+        <div class="header-content">
+            <div class="header-left">
+                <h1>UTD Escape Room: Learn Cybersecurity</h1>
+                <p class="subtitle">An interactive challenge to test your skills and keep data safe!</p>
+                <a href="#info-session" class="cta-button">Start the Challenge!</a>
+            </div>
+            <div class="header-right">
+                <!-- Replace with the actual hero image from your images folder -->
+                <img src="images/hero-image.jpeg" alt="Cybersecurity Concept" class="header-image"> 
+            </div>
+        </div>
     </header>
 
-    <!-- Inventory in the Top Right -->
-    <section id="inventory-section" class="inventory-top-right">
-      <h3>Your Inventory</h3>
-      <div id="inventory">
-        <!-- Collected keys will be displayed here -->
-      </div>
-    </section>
+    <!-- About Section -->
+    <main>
+        <section class="about-section">
+            <h2>About the Escape Room</h2>
+            <p>Welcome to the UTD Escape Room! This interactive challenge allows you to explore key cybersecurity concepts through exciting games and puzzles. Whether you're a beginner or an expert, there’s something here for everyone.</p>
+        </section>
 
-    <!-- Room Layout -->
-    <section id="room-1" class="room active-room">
-      <h2 id="instruction-text">Find 5 Keys to Unlock the Door</h2>
-      <p class="instruction">Solve puzzles to collect all 5 keys. Drag the keys onto the door to unlock it.</p>
+        <!-- Challenges Section -->
+        <section class="challenges-section">
+            <h2>Challenges Overview</h2>
 
-      <div class="room-layout">
-        <!-- Locked Door -->
-        <img src="images/locked-door.png" id="locked-door" class="room-object door" ondrop="drop(event)" ondragover="allowDrop(event)" alt="Locked Door" title="Drag the keys onto the door to unlock!">
+            <!-- Challenge 1 Image -->
+            <div class="challenge">
+                <h3>Jeopardy Challenge: System Infrastructure and Architecture</h3>
+                <p>Answer questions related to system infrastructure and architecture to proceed!</p>
+                <!-- Replace with the actual challenge image from your images folder -->
+                <img src="images/challenge1.png" alt="Challenge 1 Image">
+            </div>
 
-        <!-- Unlocked Door (hidden initially) -->
-        <img src="images/unlocked-door.png" id="unlocked-door" class="room-object door" alt="Unlocked Door" style="display: none;">
-      </div>
+            <!-- Challenge 2 Image -->
+            <div class="challenge">
+                <h3>Cryptography Puzzle: Ciphers and Encryption</h3>
+                <p>Decode secret messages using famous ciphers to reveal hidden information.</p>
+                <!-- Replace with the actual challenge image from your images folder -->
+                <img src="images/challenge2.jpeg" alt="Challenge 2 Image">
+            </div>
+        </section>
+    </main>
 
-      <!-- Puzzle Section -->
-      <div class="puzzle-section">
-        <h3>Cryptography Puzzle <span id="puzzle-number">1</span>/5</h3>
-        <p id="cipher-challenge">Cipher: UFTU</p>
-        <input type="text" id="cipher-input" placeholder="Enter cipher solution">
-        <button id="check-cipher" class="btn">Submit</button>
-        <p id="cipher-result"></p>
-
-        <!-- Hint Button and Hint Text at the Bottom -->
-        <div class="hint-container">
-          <button id="show-hint" class="btn hint-btn">Hint</button>
-          <p id="hint-text" class="hint-text hidden"></p>
-        </div>
-
-        <!-- "How Ciphers Work" Button Under Hint -->
-        <div class="learn-section">
-          <button id="learn-ciphers" class="btn learn-btn">How Ciphers Work</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- End Game Section -->
-    <section id="final-score-section" style="display: none;">
-      <h2>Congratulations!</h2>
-      <p>You found all 5 keys and unlocked the door!</p>
-      <button id="restart-game" class="btn restart">Restart Game</button>
-    </section>
-
-    <!-- Modal for Learning About Ciphers -->
-    <div id="cipher-modal" class="modal hidden">
-      <div class="modal-content">
-        <span class="close-modal" id="close-modal">&times;</span>
-        <h2>How Ciphers Work</h2>
-        <p>Ciphers are ways to encode messages so that they can't be easily understood by anyone except the intended recipient. Some common ciphers include:</p>
-        <ul>
-          <li><b>Caesar Cipher</b>: Letters are shifted by a certain number of positions in the alphabet. For example, "A" becomes "D" if shifted by 3.</li>
-          <li><b>Substitution Cipher</b>: Each letter in the plaintext is replaced by a corresponding letter from a scrambled alphabet.</li>
-          <li><b>Vigenère Cipher</b>: Uses a series of different Caesar ciphers based on the letters of a keyword.</li>
-        </ul>
-        <p>To decode a cipher, look for patterns and try to match them to possible shifts or substitutions.</p>
-      </div>
-    </div>
-  </div>
-
-  <script src="js/app.js"></script>
+    <!-- Footer Section -->
+    <footer>
+        <p>UTD Escape Room | Naveen Jindal School of Management | The University of Texas at Dallas</p>
+        <!-- Replace with the actual footer image from your images folder -->
+        <img src="images/footer-image.jpeg" alt="UTD Campus" class="footer-image">
+    </footer>
 </body>
 </html>
