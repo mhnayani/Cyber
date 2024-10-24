@@ -32,7 +32,7 @@ header h1 {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     background: url('../images/dark-room-bg.jpg') no-repeat center center/cover;
 }
 
