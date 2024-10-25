@@ -1,0 +1,104 @@
+/* General Styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    text-align: center; /* Center all content */
+}
+
+nav {
+    background-color: #007a33;
+    color: #ffffff;
+    padding: 0.5rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.nav-logo {
+    height: 40px;
+    margin-right: 10px;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+}
+
+.nav-links li a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+/* Hero Section */
+.hero-section {
+    height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                url('iStock-1335295270.jpg') no-repeat center center/cover;
+    color: #ffffff;
+}
+
+.hero-content h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    background-color: #ff8200;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    transition: background 0.3s, transform 0.3s;
+}
+
+.cta-button:hover {
+    background-color: #e67e22;
+    transform: scale(1.05);
+}
+
+/* Centered Section Styles */
+section {
+    margin: 2rem auto;
+    max-width: 900px; /* Set max width to center content */
+}
+
+.features-list, .deliverables-list, .steps-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.features-list li, .deliverables-list li, .steps-list li {
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+/* Game Cards Styling */
+.game-cards {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.game-card {
+    background-color: #ffffff;
+    padding: 1.5rem;
+    border-radius: 
