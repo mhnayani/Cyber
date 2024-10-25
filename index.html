@@ -18,6 +18,7 @@
   <div id="menu-screen" class="screen hidden">
     <h2>Select a Game</h2>
     <button id="start-crypto" class="btn">Cryptography Puzzle</button>
+    <button id="start-cyber" class="btn">Cyberbullying</button>
     <button id="start-memory" class="btn">Memory Game</button> <!-- Example of another game -->
   </div>
 
@@ -38,7 +39,7 @@
     </section>
 
     <!-- Room Layout -->
-    <section id="room-1" class="room active-room">
+    <section id="main-section" class="room active-room hidden" style="margin-top: 4rem;">
       <h2 id="instruction-text">Find 5 Keys to Unlock the Door</h2>
       <p class="instruction">Solve puzzles to collect all 5 keys. Drag the keys onto the door to unlock it.</p>
 
@@ -51,7 +52,7 @@
       </div>
 
       <!-- Puzzle Section -->
-      <div class="puzzle-section">
+      <div id="room-1" class="puzzle-section hidden">
         <h3>Cryptography Puzzle <span id="puzzle-number">1</span>/5</h3>
         <p id="cipher-challenge">Cipher: UFTU</p>
         <input type="text" id="cipher-input" placeholder="Enter cipher solution">
@@ -69,7 +70,31 @@
           <button id="learn-ciphers" class="btn learn-btn">How Ciphers Work</button>
         </div>
       </div>
+
+      <div id="room-2" class="puzzle-section hidden">
+        <!-- <h2 id="instruction-text">Someone leaves a rude comment on your social media post. What should you do?</h2> -->
+        <p id="puzzle-question" style="font-weight: bold;">Someone leaves a rude comment on your social media post. What should you do?</p>
+        <div class="options">
+          <button id="btn-1" onclick="checkCyber('btn-1')" 
+            style="background-color: #007bff; color: white; padding: 10px 20px; margin: 10px; border: none; border-radius: 5px; font-size: 16px; cursor: pointer;">
+            Ignore the comment
+          </button>
+          
+          <button id="btn-2" onclick="checkCyber('btn-2')" 
+            style="background-color: #007bff; color: white; padding: 10px 20px; margin: 10px; border: none; border-radius: 5px; font-size: 16px; cursor: pointer;">
+            Respond rudely
+          </button>
+          
+          <button id="btn-3" onclick="checkCyber('btn-3')" 
+            style="background-color: #007bff; color: white; padding: 10px 20px; margin: 10px; border: none; border-radius: 5px; font-size: 16px; cursor: pointer;">
+            Report it to the platform
+          </button>
+        </div>
+        <p id="feedback1" class="feedback"></p>
+      </div>
     </section>
+
+    
 
     <!-- End Game Section -->
     <section id="final-score-section" style="display: none;">
