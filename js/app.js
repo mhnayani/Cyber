@@ -129,8 +129,50 @@ document.getElementById('start-phishing').addEventListener('click', function() {
 document.getElementById('back-to-menu').addEventListener('click', function() {
   document.getElementById('game-screen').classList.add('hidden');
   document.getElementById('menu-screen').classList.remove('hidden');
-  // resetGame(); // Reset the game when going back to the menu
+  resetGame(); // Reset the game when going back to the menu
 });
+
+// Reset all game progress
+function resetGame() {
+  // Reset game variables
+  currentPuzzleIndex = 0;
+  keysDropped = 0;
+  inventory = [];
+
+  // Clear inventory UI
+  document.getElementById('inventory').innerHTML = '';
+
+  // Reset door and puzzle screens
+  document.getElementById('locked-door').style.display = 'block';
+  document.getElementById('unlocked-door').style.display = 'none';
+  document.querySelector('.room-layout').classList.add('hidden');
+  document.getElementById('final-score-section').style.display = 'none';
+
+  // Clear puzzle input and feedback for cryptography
+  document.getElementById('cipher-input').value = '';
+  document.getElementById('cipher-result').textContent = '';
+
+  // Clear password input and feedback
+  document.getElementById('password-input').value = '';
+  document.getElementById('password-feedback').textContent = '';
+  document.querySelectorAll('#password-feedback li').forEach(li => li.classList.remove('met'));
+  document.getElementById('confirm-password').disabled = true;
+
+  // Reset cyberbullying feedback
+  document.getElementById('feedback1').textContent = '';
+
+  // Reset phishing feedback
+  document.getElementById('phishing-feedback').textContent = '';
+
+  // Hide all game sections
+  let elements = document.querySelectorAll('.puzzle-section');
+  elements.forEach(element => element.classList.add('hidden'));
+
+  // Reload the first puzzle in each game type if needed
+  loadNextPuzzle();
+  loadNextCyber();
+  loadNextPhishing();
+}
 
 // Event listeners for solving puzzles, showing hints, and learning ciphers
 document.getElementById('check-cipher').addEventListener('click', checkCipher);
