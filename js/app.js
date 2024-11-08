@@ -48,6 +48,44 @@ let cyberPuzzles = [
   },
 ];
 
+let phishingChallenges = [
+  { 
+    challenge: 'You receive an email saying you’ve won a prize. It asks for your credit card information. What should you do?', 
+    answer: 'Ignore and delete the email', 
+    btn1: 'Provide your information to claim the prize', 
+    btn2: 'Ignore and delete the email', 
+    btn3: 'Forward to a friend to check' 
+  },
+  { 
+    challenge: 'An email claims to be from your bank, asking you to verify your account by clicking a link. What should you do?', 
+    answer: 'Contact your bank directly', 
+    btn1: 'Click the link to verify your account', 
+    btn2: 'Contact your bank directly', 
+    btn3: 'Reply asking for more information' 
+  },
+  { 
+    challenge: 'A message from an unknown sender asks you to install an update for better security. What should you do?', 
+    answer: 'Do not install it, and delete the message', 
+    btn1: 'Install the update for security', 
+    btn2: 'Do not install it, and delete the message', 
+    btn3: 'Forward the message to IT' 
+  },
+  { 
+    challenge: 'You receive a friend request on social media from someone you don’t know. What’s the best action?', 
+    answer: 'Ignore the request', 
+    btn1: 'Accept the request', 
+    btn2: 'Ignore the request', 
+    btn3: 'Send a message to get to know them' 
+  },
+  { 
+    challenge: 'You see an ad offering a “too good to be true” deal. It asks for personal information to redeem. What should you do?', 
+    answer: 'Ignore and do not provide information', 
+    btn1: 'Enter your details to claim the offer', 
+    btn2: 'Ignore and do not provide information', 
+    btn3: 'Share the ad with friends' 
+  }
+];
+
 // Event listener for the Start button
 document.getElementById('start-game').addEventListener('click', function() {
   document.getElementById('welcome-screen').classList.add('hidden');
@@ -76,6 +114,17 @@ document.getElementById('start-cyber').addEventListener('click', function() {
   loadNextCyber(); // Load the first puzzle
 });
 
+// Event listener for the Phishing Game button
+document.getElementById('start-phishing').addEventListener('click', function() {
+  document.getElementById('menu-screen').classList.add('hidden');
+  document.getElementById('game-screen').classList.remove('hidden');
+  document.getElementById('main-section').classList.remove('hidden');
+  let elements = document.querySelectorAll('.puzzle-section');
+  elements.forEach(element => element.classList.add('hidden'));
+  document.getElementById('room-3').classList.remove('hidden');
+  loadNextPhishing(); // Load the first phishing challenge
+});
+
 // Event listener for the Back to Menu button
 document.getElementById('back-to-menu').addEventListener('click', function() {
   document.getElementById('game-screen').classList.add('hidden');
@@ -88,6 +137,35 @@ document.getElementById('check-cipher').addEventListener('click', checkCipher);
 document.getElementById('show-hint').addEventListener('click', showHint);
 document.getElementById('learn-ciphers').addEventListener('click', openCipherModal);
 document.getElementById('close-modal').addEventListener('click', closeCipherModal);
+
+function loadNextPhishing() {
+  if (currentPuzzleIndex < phishingChallenges.length) {
+    document.getElementById('phishing-question').textContent = phishingChallenges[currentPuzzleIndex].challenge;
+    document.getElementById('phishing-btn-1').textContent = phishingChallenges[currentPuzzleIndex].btn1;
+    document.getElementById('phishing-btn-2').textContent = phishingChallenges[currentPuzzleIndex].btn2;
+    document.getElementById('phishing-btn-3').textContent = phishingChallenges[currentPuzzleIndex].btn3;
+  }
+}
+
+function checkPhishing(id) {
+  const userInput = document.getElementById(id).textContent.trim();
+  const challenge = phishingChallenges[currentPuzzleIndex];
+
+  if (userInput === challenge.answer) {
+    document.getElementById('phishing-feedback').textContent = 'Correct!';
+    addToInventory(`yellowkey${currentPuzzleIndex + 1}`);
+    currentPuzzleIndex++;
+
+    if (currentPuzzleIndex < totalKeys) {
+      loadNextPhishing();
+    } else {
+      document.getElementById('room-3').classList.add('hidden');
+      showInventoryAndDoor();
+    }
+  } else {
+    document.getElementById('phishing-feedback').textContent = 'Incorrect, try again.';
+  }
+}
 
 function allowDrop(event) {
   event.preventDefault();

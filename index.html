@@ -19,7 +19,7 @@
     <h2>Select a Game</h2>
     <button id="start-crypto" class="btn">Cryptography Puzzle</button>
     <button id="start-cyber" class="btn">Cyberbullying</button>
-    <button id="start-memory" class="btn">Phishing Game</button>
+    <button id="start-phishing" class="btn">Phishing Game</button>
   </div>
 
   <!-- Game Screen (Escape Room Game) -->
@@ -94,6 +94,17 @@
       </div>
     </section>
 
+    <!-- Phishing Game Section -->
+    <div id="room-3" class="puzzle-section hidden">
+      <h3>Phishing Awareness Challenge</h3>
+      <p id="phishing-question" style="font-weight: bold;">Question will appear here</p>
+      <div class="options">
+        <button id="phishing-btn-1" onclick="checkPhishing('phishing-btn-1')" class="btn option-btn"></button>
+        <button id="phishing-btn-2" onclick="checkPhishing('phishing-btn-2')" class="btn option-btn"></button>
+        <button id="phishing-btn-3" onclick="checkPhishing('phishing-btn-3')" class="btn option-btn"></button>
+      </div>
+      <p id="phishing-feedback" class="feedback"></p>
+    </div>
     
 
     <!-- End Game Section -->
