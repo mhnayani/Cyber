@@ -50,7 +50,7 @@ let cyberPuzzles = [
 
 let phishingChallenges = [
   { 
-    challenge: 'You receive an email saying you’ve won a prize. It asks for your credit card information. What should you do?', 
+    challenge: "You receive an email saying you've won a prize. It asks for your credit card information. What should you do?", 
     answer: 'Ignore and delete the email', 
     btn1: 'Provide your information to claim the prize', 
     btn2: 'Ignore and delete the email', 
@@ -86,6 +86,49 @@ let phishingChallenges = [
   }
 ];
 
+let passwordPuzzles = [
+  { 
+    challenge: 'Which of the following passwords is considered most secure?', 
+    answer: 'P@ssw0rd2023!', 
+    btn1: 'pass123', 
+    btn2: 'password123', 
+    btn3: 'P@ssw0rd2023!',
+    btn4: 'abc123' 
+  },
+  { 
+    challenge: 'Which of these is the best practice for creating a secure password?', 
+    answer: 'Combine random words with special characters', 
+    btn1: "Use your birthdate and pet's name", 
+    btn2: 'Combine random words with special characters', 
+    btn3: 'Use the word "password" with a number at the end',
+    btn4: 'Use your favorite color and the year' 
+  },
+  { 
+    challenge: 'Which password is the strongest due to character variety?', 
+    answer: 'P@ssw0rd!23', 
+    btn1: 'qwerty123', 
+    btn2: 'MyPassword123', 
+    btn3: 'P@ssw0rd!23',
+    btn4: '1234567890' 
+  },
+  { 
+    challenge: 'Which of these passwords should you avoid using because it is commonly guessed?', 
+    answer: '123456', 
+    btn1: '!LoveCoding123', 
+    btn2: 'Pa$$w0rd123!', 
+    btn3: 'Sunshine2022',
+    btn4: '123456' 
+  },
+  { 
+    challenge: 'Which of these examples is the best passphrase for both security and memorability?', 
+    answer: 'Cats$Love!Sun2023', 
+    btn1: 'RedBlueYellowGreen', 
+    btn2: 'Cats$Love!Sun2023', 
+    btn3: 'ABC123!',
+    btn4: 'name@123' 
+  },
+];
+
 // Event listener for the Start button
 document.getElementById('start-game').addEventListener('click', function() {
   document.getElementById('welcome-screen').classList.add('hidden');
@@ -112,6 +155,17 @@ document.getElementById('start-cyber').addEventListener('click', function() {
   elements.forEach(element => element.classList.add('hidden'));
   document.getElementById('room-2').classList.remove('hidden');
   loadNextCyber(); // Load the first puzzle
+});
+
+// Event listener for the Password Strength Meter button
+document.getElementById('start-password').addEventListener('click', function() {
+  document.getElementById('menu-screen').classList.add('hidden');
+  document.getElementById('game-screen').classList.remove('hidden');
+  document.getElementById('main-section').classList.remove('hidden');
+  let elements = document.querySelectorAll('.puzzle-section');
+  elements.forEach(element => element.classList.add('hidden'));
+  document.getElementById('room-4').classList.remove('hidden');
+  loadNextPasswordQuestion(); // Load the first puzzle
 });
 
 // Event listener for the Phishing Game button
@@ -164,6 +218,9 @@ function resetGame() {
   // Reset phishing feedback
   document.getElementById('phishing-feedback').textContent = '';
 
+  // Reset password meter feedback
+  document.getElementById('password-meter-feedback').textContent = '';
+
   // Hide all game sections
   let elements = document.querySelectorAll('.puzzle-section');
   elements.forEach(element => element.classList.add('hidden'));
@@ -172,6 +229,7 @@ function resetGame() {
   loadNextPuzzle();
   loadNextCyber();
   loadNextPhishing();
+  loadNextPasswordQuestion();
 }
 
 // Event listeners for solving puzzles, showing hints, and learning ciphers
@@ -271,6 +329,26 @@ function checkCyber(id) {
   }
 }
 
+function checkPassword(id) {
+  const userInput = document.getElementById(id).textContent.trim();
+  const puzzle = passwordPuzzles[currentPuzzleIndex];
+
+  if (userInput === puzzle.answer) {
+    document.getElementById('password-meter-feedback').innerHTML = '';
+    addToInventory(`yellowkey${currentPuzzleIndex + 1}`);
+    currentPuzzleIndex++;
+
+    if (currentPuzzleIndex < totalKeys) {
+      loadNextPasswordQuestion();
+    } else {
+      document.getElementById('room-4').classList.add('hidden');
+      showInventoryAndDoor();
+    }
+  } else {
+    document.getElementById('password-meter-feedback').innerHTML = 'Incorrect, try again.';
+  }
+}
+
 function loadNextPuzzle() {
   if (currentPuzzleIndex < totalKeys) {
     document.getElementById('cipher-result').textContent = '';
@@ -287,6 +365,16 @@ function loadNextCyber() {
     document.getElementById('btn-1').innerHTML = cyberPuzzles[currentPuzzleIndex].btn1;
     document.getElementById('btn-2').innerHTML = cyberPuzzles[currentPuzzleIndex].btn2;
     document.getElementById('btn-3').innerHTML = cyberPuzzles[currentPuzzleIndex].btn3;
+  }
+}
+
+function loadNextPasswordQuestion() {
+  if (currentPuzzleIndex < totalKeys) {
+    document.getElementById('password-question').innerHTML = passwordPuzzles[currentPuzzleIndex].challenge;
+    document.getElementById('password-btn-1').innerHTML = passwordPuzzles[currentPuzzleIndex].btn1;
+    document.getElementById('password-btn-2').innerHTML = passwordPuzzles[currentPuzzleIndex].btn2;
+    document.getElementById('password-btn-3').innerHTML = passwordPuzzles[currentPuzzleIndex].btn3;
+    document.getElementById('password-btn-4').innerHTML = passwordPuzzles[currentPuzzleIndex].btn4;
   }
 }
 
@@ -322,6 +410,7 @@ function clearInventory() {
   keysDropped = 0;
   document.getElementById('inventory').innerHTML = '';
   document.getElementById('puzzle-question').innerHTML = '';
+  document.getElementById('password-question').innerHTML = '';
   // document.querySelector('.room-layout').classList.add('hidden');
 }
 
