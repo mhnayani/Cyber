@@ -10,6 +10,30 @@ let puzzles = [
   { cipher: 'LXFOPV EF RNHR', answer: 'ATTACK AT DAWN', hint: 'Try using a Caesar Cipher with a shift of 3.' }
 ];
 
+let jeopardyScore = 0;
+let jeopardyQuestions = [
+  // Row 1
+  { question: "What does HTTP stand for?", answer: "HyperText Transfer Protocol", score: 100 },
+  { question: "What does DNS stand for?", answer: "Domain Name System", score: 200 },
+  { question: "What does SSL stand for?", answer: "Secure Sockets Layer", score: 300 },
+  { question: "What is the main purpose of a firewall?", answer: "To block unauthorized access", score: 400 },
+  // Row 2
+  { question: "What does IP stand for?", answer: "Internet Protocol", score: 100 },
+  { question: "What is phishing?", answer: "A cyberattack to steal personal information", score: 200 },
+  { question: "What is the strongest password?", answer: "A mix of letters, numbers, and symbols", score: 300 },
+  { question: "What is two-factor authentication?", answer: "A method requiring two forms of verification", score: 400 },
+  // Row 3
+  { question: "What does VPN stand for?", answer: "Virtual Private Network", score: 100 },
+  { question: "What is ransomware?", answer: "A type of malware demanding payment", score: 200 },
+  { question: "What is encryption?", answer: "Encoding data to protect it from unauthorized access", score: 300 },
+  { question: "What is a botnet?", answer: "A network of infected devices used in cyberattacks", score: 400 },
+  // Row 4
+  { question: "What does IoT stand for?", answer: "Internet of Things", score: 100 },
+  { question: "What is social engineering?", answer: "Manipulating people to gain confidential information", score: 200 },
+  { question: "What is malware?", answer: "Software designed to harm or exploit devices", score: 300 },
+  { question: "What does PKI stand for?", answer: "Public Key Infrastructure", score: 400 }
+];
+
 let cyberPuzzles = [
   { 
     challenge: 'Someone leaves a rude comment on your social media post. What should you do?', 
@@ -186,6 +210,96 @@ document.getElementById('back-to-menu').addEventListener('click', function() {
   resetGame(); // Reset the game when going back to the menu
 });
 
+// Event listener for the Jeopardy Game button
+document.addEventListener('DOMContentLoaded', function () {
+  document.getElementById('start-jeopardy').addEventListener('click', function () {
+    document.getElementById('menu-screen').classList.add('hidden');
+    document.getElementById('game-screen').classList.remove('hidden');
+    document.getElementById('main-section').classList.remove('hidden');
+
+    // Hide unnecessary instructions
+    document.getElementById('instruction-text').classList.add('hidden');
+    document.querySelector('.instruction').classList.add('hidden');
+
+    let elements = document.querySelectorAll('.puzzle-section');
+    elements.forEach(element => element.classList.add('hidden'));
+    document.getElementById('room-5').classList.remove('hidden'); // Show Jeopardy section
+    loadJeopardyBoard();
+  });
+});
+
+function loadJeopardyBoard() {
+  const board = document.getElementById('jeopardy-board');
+  board.innerHTML = ""; // Clear the board before adding buttons
+
+  jeopardyQuestions.forEach((q, index) => {
+    const cell = document.createElement('button');
+    cell.textContent = `${q.score}`; // Initially show the score value
+    cell.classList.add('jeopardy-cell');
+    cell.setAttribute('data-index', index);
+
+    // Add click event to show the question in the clicked cell
+    cell.onclick = function () {
+      console.log(`Button ${index + 1} clicked`);
+      showJeopardyQuestion(cell, index);
+    };
+
+    board.appendChild(cell);
+  });
+}
+
+function showJeopardyQuestion(cell, index) {
+  const question = jeopardyQuestions[index];
+  console.log(`Displaying question ${index + 1}: ${question.question}`);
+
+  // Replace button text with the question
+  cell.textContent = question.question;
+
+  // Disable the button to prevent re-clicking
+  cell.disabled = true;
+
+  // Show an answer input and submit button below the board
+  const answerContainer = document.getElementById('jeopardy-answer-container');
+  answerContainer.innerHTML = `
+    <p>Answer for: ${question.question}</p>
+    <input type="text" id="jeopardy-answer" placeholder="Your answer" style="width: 80%; padding: 10px;">
+    <button id="submit-jeopardy-answer" class="btn" style="margin-top: 10px;">Submit</button>
+  `;
+
+  // Add click handler for the submit button
+  document.getElementById('submit-jeopardy-answer').onclick = function () {
+    console.log(`Submitting answer for question ${index + 1}`);
+    checkJeopardyAnswer(index, cell);
+  };
+}
+
+function checkJeopardyAnswer(index, cell) {
+  const userAnswer = document.getElementById('jeopardy-answer').value.trim();
+  const question = jeopardyQuestions[index];
+
+  if (userAnswer.toLowerCase() === question.answer.toLowerCase()) {
+    alert('Correct!');
+    cell.textContent = '✓'; // Mark the cell as answered
+    // Update the score display
+    updateScoreDisplay(question.score);
+  } else {
+    alert(`Incorrect! The correct answer is: ${question.answer}`);
+    cell.textContent = '✗'; // Mark the cell as incorrect
+  }
+
+  console.log(`Updated score: ${jeopardyScore}`);
+  console.log(`Question score: ${question.score}`);
+
+  // Clear the answer container
+  document.getElementById('jeopardy-answer-container').innerHTML = '';
+}
+
+function updateScoreDisplay(score) {
+  jeopardyScore += score
+  const scoreElement = document.getElementById('jeopardy-score');
+  scoreElement.textContent = `Score: ${jeopardyScore}`;
+}
+
 // Reset all game progress
 function resetGame() {
   // Reset game variables
@@ -205,6 +319,22 @@ function resetGame() {
   // Clear puzzle input and feedback for cryptography
   document.getElementById('cipher-input').value = '';
   document.getElementById('cipher-result').textContent = '';
+
+  // clear jeopardy game score
+  jeopardyScore = 0;
+
+  // Update the score display
+  updateScoreDisplay(jeopardyScore);
+
+  // Clear the Jeopardy board
+  const board = document.getElementById('jeopardy-board');
+  board.innerHTML = ""; // Remove all buttons
+
+  // Clear the answer container
+  const answerContainer = document.getElementById('jeopardy-answer-container');
+  answerContainer.innerHTML = "";
+
+  console.log("Jeopardy game has been reset.");
 
   // Clear password input and feedback
   document.getElementById('password-input').value = '';

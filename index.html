@@ -21,6 +21,7 @@
     <button id="start-cyber" class="btn">Cyberbullying</button>
     <button id="start-phishing" class="btn">Phishing Game</button>
     <button id="start-password" class="btn">Password Strength Game</button>
+    <button id="start-jeopardy" class="btn">Jeopardy Game</button>
   </div>
 
   <!-- Game Screen (Escape Room Game) -->
@@ -133,8 +134,43 @@
       </div>
       <p id="phishing-feedback" class="feedback"></p>
     </div>
-    
 
+    <!-- Removed instructions for Jeopardy -->
+    <h2 id="instruction-text" class="hidden">Find 5 Keys to Unlock the Door</h2>
+    <p class="instruction hidden">Solve puzzles to collect all 5 keys. Drag the keys onto the door to unlock it.</p>
+
+    <div id="room-5" class="puzzle-section hidden">
+      <h3>Jeopardy Game</h3>
+      <p>Answer questions to score points!</p>
+    
+      <!-- Jeopardy Board -->
+      <div id="jeopardy-board" 
+           style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 20px;">
+      </div>
+    
+      <!-- Score Display -->
+      <div id="jeopardy-score" style="font-size: 1.5rem; margin-top: 20px; font-weight: bold;">
+        Score: 0
+      </div>
+    
+      <!-- Answer Input and Submit Button -->
+      <div id="jeopardy-answer-container" style="margin-top: 20px;">
+        <!-- This will be populated dynamically -->
+      </div>
+    </div>
+    
+    
+    <!-- Jeopardy Question Modal -->
+    <div id="jeopardy-modal" class="modal hidden">
+      <div class="modal-content">
+        <span class="close-modal" id="close-jeopardy-modal" onclick="document.getElementById('jeopardy-modal').classList.add('hidden');">&times;</span>
+        <h2>Jeopardy Question</h2>
+        <p id="jeopardy-question"></p>
+        <input type="text" id="jeopardy-answer" placeholder="Your answer" style="width: 80%; padding: 10px; margin-top: 20px;">
+        <button id="submit-jeopardy-answer" class="btn" style="margin-top: 20px;">Submit</button>
+      </div>
+    </div>
+    
     <!-- End Game Section -->
     <section id="final-score-section" style="display: none;">
       <h2>Congratulations!</h2>
