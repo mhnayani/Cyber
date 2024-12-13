@@ -2,7 +2,7 @@
 body {
     font-family: 'Orbitron', sans-serif;
     background-color: #1c1c1e;
-    color: #f2f2f2;
+    color: #d86b06;
     margin: 0;
     padding: 0;
     height: 100vh;
@@ -20,7 +20,7 @@ header {
 
 header h1 {
     font-size: 2.5rem;
-    color: #f25f85;
+    color: #558907;
     margin: 0;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -121,7 +121,7 @@ header h1 {
 }
 
 button.btn {
-    background-color: #f25f85;
+    background-color: #d86b06;
     color: #fff;
     padding: 10px 20px;
     border: none;
@@ -131,11 +131,11 @@ button.btn {
 }
 
 button.btn:hover {
-    background-color: #ff7598;
+    background-color: #558907;
 }
 
 #puzzle-number {
-    color: #f25f85;
+    color: #558907;
     font-weight: bold;
 }
 
@@ -149,16 +149,16 @@ button.btn:hover {
 }
 
 .restart {
-    background-color: #2aa198;
+    background-color: #558907;
 }
 
 .restart:hover {
-    background-color: #3cb3a5;
+    background-color: #558907;
 }
 
 /* Back to Menu Button Styling */
 .back-btn {
-    background-color: #2aa198;
+    background-color: #558907;
     color: #fff;
     padding: 10px 20px;
     font-size: 1rem;
@@ -169,7 +169,7 @@ button.btn:hover {
 }
 
 .back-btn:hover {
-    background-color: #3cb3a5;
+    background-color: #558907;
 }
 
 /* Animations */
@@ -232,7 +232,7 @@ button.btn:hover {
   }
 
 .jeopardy-cell {
-  background-color: #f25f85;
+  background-color: #558907;
   color: white;
   padding: 20px;
   font-size: 1.2rem;

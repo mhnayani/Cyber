@@ -273,11 +273,69 @@ function showJeopardyQuestion(cell, index) {
   };
 }
 
+// function checkJeopardyAnswer(index, cell) {
+//   const userAnswer = document.getElementById('jeopardy-answer').value.trim();
+//   const question = jeopardyQuestions[index];
+
+//   if (userAnswer.toLowerCase() === question.answer.toLowerCase()) {
+//     alert('Correct!');
+//     cell.textContent = '✓'; // Mark the cell as answered
+//     // Update the score display
+//     updateScoreDisplay(question.score);
+//   } else {
+//     alert(`Incorrect! The correct answer is: ${question.answer}`);
+//     cell.textContent = '✗'; // Mark the cell as incorrect
+//   }
+
+//   console.log(`Updated score: ${jeopardyScore}`);
+//   console.log(`Question score: ${question.score}`);
+
+//   // Clear the answer container
+//   document.getElementById('jeopardy-answer-container').innerHTML = '';
+// }
+
+// Function to calculate similarity using Levenshtein Distance
+function calculateSimilarity(a, b) {
+  const dp = Array.from({ length: a.length + 1 }, () => Array(b.length + 1).fill(0));
+
+  for (let i = 0; i <= a.length; i++) dp[i][0] = i;
+  for (let j = 0; j <= b.length; j++) dp[0][j] = j;
+
+  for (let i = 1; i <= a.length; i++) {
+    for (let j = 1; j <= b.length; j++) {
+      if (a[i - 1] === b[j - 1]) {
+        dp[i][j] = dp[i - 1][j - 1];
+      } else {
+        dp[i][j] = Math.min(dp[i - 1][j - 1], dp[i][j - 1], dp[i - 1][j]) + 1;
+      }
+    }
+  }
+  return dp[a.length][b.length];
+}
+
+// Enhanced answer check
+function isAnswerCorrect(userAnswer, correctAnswer) {
+  userAnswer = userAnswer.trim().toLowerCase();
+  correctAnswer = correctAnswer.trim().toLowerCase();
+
+  // Allow exact match
+  if (userAnswer === correctAnswer) {
+    return true;
+  }
+
+  // Allow fuzzy match with a similarity threshold
+  const similarityThreshold = 10; // Adjust based on leniency
+  const similarity = calculateSimilarity(userAnswer, correctAnswer);
+
+  return similarity <= similarityThreshold;
+}
+
+// Updated function to check Jeopardy answer
 function checkJeopardyAnswer(index, cell) {
   const userAnswer = document.getElementById('jeopardy-answer').value.trim();
   const question = jeopardyQuestions[index];
 
-  if (userAnswer.toLowerCase() === question.answer.toLowerCase()) {
+  if (isAnswerCorrect(userAnswer, question.answer)) {
     alert('Correct!');
     cell.textContent = '✓'; // Mark the cell as answered
     // Update the score display
